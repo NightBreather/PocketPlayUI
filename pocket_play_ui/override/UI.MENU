@@ -595,11 +595,7 @@ function updateAttrTable()
 			table.insert(listItems, { '233', '^D' .. getUiString('STATUS_EFFECTS_LABEL') .. ':' .. '^B'})
 		end
 		for k, v in pairs(characters[currentID].statusEffects) do
-			if v.current == 0 then --haste exception
-				table.insert(listItems, {103, '    ' .. Infinity_FetchString(v.strRef)})
-			else
-				table.insert(listItems, {v.current, '    ' .. Infinity_FetchString(v.strRef)})
-			end
+			table.insert(listItems, {v.current, '    ' .. Infinity_FetchString(v.strRef), v.bam})
 		end
 		if statusEffects[1] ~= nil then
 			table.insert(listItems, { '233', '' })
@@ -1282,7 +1278,7 @@ menu
 			label
 			{
 				area		0 0 -1 -1
-				bam            'STATES'
+				bam            lua "listItems[rowNumber][3] or 'STATES'"
 				sequence    lua "listItems[rowNumber][1]"
 				text align	left center
 				enabled "listItems[rowNumber][1] ~= '233'"
