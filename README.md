@@ -1,18 +1,15 @@
-# Pocket Play UI++ — durum ikonu düzeltmeli fork
+# Pocket Play UI++ (PPUI)
 
-Bu depo, **Pocket Play UI++ (PPUI)** arayüz modunun bir **fork**'udur.
-Upstream'e göre tek amaçlı fark: karakter kaydı **"Etkiler" (status effects)** listesindeki
-ikonları **vanilla `ui.menu` yöntemine** çeviren düzeltmedir.
+**Pocket Play UI++ (PPUI)** arayüz modunun bir fork'u. Orjinal sürüme göre tek fark:
+karakter kaydı **"Etkiler"** listesindeki ikonları **vanilla `ui.menu` yöntemine** çeviren düzeltme.
 
 | | |
 |---|---|
-| **Upstream (orjinal)** | [`Renegade0/PocketPlayUI`](https://github.com/Renegade0/PocketPlayUI) — yazar: **Pecca** |
+| **Orjinal mod** | [`Renegade0/PocketPlayUI`](https://github.com/Renegade0/PocketPlayUI) — yazar: **Pecca** |
 | **Bu fork** | [`NightBreather/PocketPlayUI`](https://github.com/NightBreather/PocketPlayUI) |
-| **Taban commit** | `59ae27d` — *"more v2.7 compatibility fixes"* (PPUI `v2.3`) |
+| **Temel sürüm** | `59ae27d` (*"more v2.7 compatibility fixes"*, PPUI `v2.3`) |
 | **Değişen dosya** | `pocket_play_ui/override/UI.MENU` |
-| **Detaylı inceleme** | [`FORK.md`](FORK.md) · [`bg-custom-portrait-icons` → `docs/ppui-record-icons.tr.md`](https://github.com/NightBreather/bg-custom-portrait-icons/blob/main/docs/ppui-record-icons.tr.md) |
-
----
+| **Ayrıntılı inceleme** | [`FORK.md`](FORK.md) · [`ppui-record-icons.tr.md`](https://github.com/NightBreather/bg-custom-portrait-icons/blob/main/docs/ppui-record-icons.tr.md) |
 
 ## Sorun
 
@@ -25,9 +22,9 @@ PPUI, vanilla'nın durum-ikonu listesini yorum satırına alıp durum satırlar�
 - Motorun zaten sağladığı `statusEffects[k].bam` alanı **hiç kullanılmaz**.
 - Yalnızca kayıt ekranı etkilenir; portre yanındaki ikonlar **doğru** kalır.
 
----
+## Çözüm
 
-## Düzeltme (`pocket_play_ui/override/UI.MENU`)
+`pocket_play_ui/override/UI.MENU` içinde iki değişiklik:
 
 ```lua
 -- 1) durum satırları: motorun verdiği bam'i 3. eleman yap, if/else (haste exception) kaldır
@@ -41,10 +38,8 @@ sequence    lua "listItems[rowNumber][1]"
 ```
 
 Böylece ikon **motora** çözdürülür (vanilla davranışı): `STATES` satırı, `col-3` tek/çok
-frame'li özel BAM'ler ve `N ≥ 190` indeksler doğru çizilir. Ayrıntı ve gerekçe tablosu:
+frame'li özel BAM'ler ve `N ≥ 190` indeksler doğru çizilir. Gerekçe tablosu ve ölçümler:
 [`FORK.md`](FORK.md).
-
----
 
 ## Kurulum
 
@@ -59,9 +54,7 @@ weidu --language 0 --use-lang tr_TR --force-install 0 --no-exit-pause pocket_pla
 > Not: `UI-backup2.6.MENU` (PPUI'nin gönderdiği, oyunun yüklemediği referans yedek) eski
 > davranışı içerir; bilinçli olarak dokunulmadı.
 
----
+## Lisans ve atıf
 
-## Lisans / atıf
-
-Upstream depoda lisans dosyası bulunamadı; mod **[Pecca](https://github.com/Renegade0)**'ya
-aittir ve upstream koşulları geçerlidir. Bu fork yalnızca yukarıdaki tek düzeltmeyi ekler.
+Orjinal depoda lisans dosyası bulunamadı; mod **[Pecca](https://github.com/Renegade0)**'ya
+aittir ve orjinal koşullar geçerlidir. Bu fork yalnızca yukarıdaki tek düzeltmeyi ekler.
