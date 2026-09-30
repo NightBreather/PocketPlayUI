@@ -1,7 +1,8 @@
 # Pocket Play UI++ (PPUI)
 
-**Pocket Play UI++ (PPUI)** arayüz modunun bir fork'u. Orjinal sürüme göre tek fark:
-karakter kaydı **"Etkiler"** listesindeki ikonları **vanilla `ui.menu` yöntemine** çeviren düzeltme.
+**Pocket Play UI++ (PPUI)** arayüz modunun bir fork'u. Orjinal sürüme göre farklar:
+karakter kaydı **"Etkiler"** listesindeki ikonları **vanilla `ui.menu` yöntemine** çeviren düzeltme
++ **EEFixpack'ten taşınan 2 `ui.menu` düzeltmesi** (QuitMenu cutscene `onOpen`, `getInventoryDamageDetails` "(null)" fix — bkz. [`FORK.md`](FORK.md)).
 
 | | |
 |---|---|

@@ -1,8 +1,8 @@
 # PPUI — "NightBreather" fork (durum ikonu / status-effect ikon düzeltmesi)
 
-Bu depo, **Pocket Play UI++ (PPUI)** modunun bir fork'udur. Upstream'e göre **tek amaçlı**
-fark: karakter kaydı **"Etkiler" (status effects)** listesindeki ikonları **vanilla `ui.menu`
-yöntemine** çeviren düzeltme.
+Bu depo, **Pocket Play UI++ (PPUI)** modunun bir fork'udur. Upstream'e göre farklar:
+**(1)** karakter kaydı **"Etkiler" (status effects)** listesindeki ikonları **vanilla `ui.menu`
+yöntemine** çeviren düzeltme, **(2)** EEFixpack'ten taşınan 2 `ui.menu` düzeltmesi (aşağıda).
 
 | | |
 |---|---|
@@ -83,6 +83,26 @@ sequence    lua "listItems[rowNumber][1]"
 `enabled "listItems[rowNumber][1] ~= '233'"` kapısı ve `sequence` davranışı **aynen** korunur.
 
 ---
+
+## EEFixpack'ten taşınan UI düzeltmeleri
+
+EEFixpack'in `ui.menu`'ya yaptığı 2 düzeltme bu fork'a **taşındı** (EEFixpack → PPUI sırasında
+PPUI menüsü onları eziyordu; PPUI bunları içermiyordu):
+
+1. **QuitMenu — cutscene'de zorla çıkış.** `QuitMenu`'ye `onOpen` eklendi:
+   ```lua
+   onOpen
+   "
+       if Infinity_GetInCutsceneMode() then
+           restoreOverlayFromQuit()
+           Infinity_ShutdownGame()
+       end
+   "
+   ```
+2. **`getInventoryDamageDetails()` — "(null)" hasar fix.** Fonksiyon
+   `string.gsub(str, "%(null%)", "0" .. dice .. "0")` ile güncellendi.
+
+Kaynak: EEFixpack `files/tph/a7/ui_quit_menu.tph`, `files/tph/a7/ui_null_damage_display.tph`.
 
 ## Kurulum
 

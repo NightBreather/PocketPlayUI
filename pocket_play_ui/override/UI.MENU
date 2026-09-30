@@ -4807,6 +4807,13 @@ menu
 	name 'QuitMenu'
 	modal
 	align center center
+	onOpen
+	"
+		if Infinity_GetInCutsceneMode() then
+			restoreOverlayFromQuit()
+			Infinity_ShutdownGame()
+		end
+	"
 	label -- Background
 	{
 		area 0 0 682 238
@@ -6433,11 +6440,15 @@ function getInventoryDamage()
 	return str
 end
 function getInventoryDamageDetails()
+	local str = ""
 	if characters[id].damage.detailsOffhand == nil or characters[id].damage.detailsOffhand == "" then
-		return characters[id].damage.details
+		str = characters[id].damage.details
 	else
-		return characters[id].damage.details.."\n\n"..characters[id].damage.detailsOffhand
+		str = characters[id].damage.details.."\n\n"..characters[id].damage.detailsOffhand
 	end
+	local dice = Infinity_FetchString(0xf00000 + 564)
+	str = string.gsub(str, "%(null%)", "0" .. dice .. "0")
+	return str
 end
 function getInventoryTHAC0Details()
 	if characters[id].THAC0.detailsOffhand == nil or characters[id].THAC0.detailsOffhand == "" then
